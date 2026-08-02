@@ -33,7 +33,13 @@ jobs:
       - run: npm test
       - run: npm run build
 
+      # `enablement` lets the workflow turn Pages on and switch it to the
+      # Actions build type itself. Without it the job fails on a fresh repo, or
+      # on one still set to "Deploy from a branch" — which would otherwise
+      # publish the raw sources instead of the built site.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
