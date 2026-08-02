@@ -1,0 +1,108 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Void — the space the planet hangs in. */
+  --color-void-950: #05060f;
+  --color-void-900: #0a0c1a;
+  --color-void-800: #111528;
+  --color-void-700: #1b2039;
+  --color-void-600: #2a3152;
+  --color-void-500: #3d4670;
+
+  /* Resource identities. Each resource owns one hue, used everywhere. */
+  --color-energy: #4dd8ff;
+  --color-matter: #ffb454;
+  --color-alloy: #c9d4e6;
+  --color-chronon: #b78cff;
+
+  /* Orientation identities, used by the fracture screen and legacy cards. */
+  --color-industrial: #ff8b52;
+  --color-organic: #5fd98b;
+  --color-synthetic: #56b7ff;
+  --color-mystic: #c98bff;
+
+  --font-display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-void-950);
+    color: #e6ebf5;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+  }
+
+  /* Numbers must never reflow the layout as they grow. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-void-600);
+    border-radius: 999px;
+    border: 3px solid var(--color-void-950);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-void-500);
+  }
+}
+
+@layer utilities {
+  /* A soft radial vignette used behind the planet canvas. */
+  .bg-starfield {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(60, 80, 160, 0.18), transparent 70%),
+      var(--color-void-950);
+  }
+}
+
+@keyframes aw-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes aw-pulse-ring {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+.animate-rise {
+  animation: aw-rise 220ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
